@@ -1,0 +1,17 @@
+import pandas as pd
+
+df = pd.read_csv('ltx.csv')
+df_group = df.groupby(['PurposeOfTheAssignment', 'Koatyy','Price','ValueNGO'], as_index=False)
+a = df['PurposeOfTheAssignment'].value_counts()
+b = df.groupby('PurposeOfTheAssignment')['Koatyy'].sum().sort_values(ascending=False)
+c = df.groupby('PurposeOfTheAssignment')['Price'].median().sort_values(ascending=False)
+d = df.groupby('PurposeOfTheAssignment')['ValueNGO'].median().sort_values(ascending=False)
+print('--------------------------')
+print(a)
+print('--------------------------')
+print(b)
+print('--------------------------')
+print(c)
+print('--------------------------')
+print(d)
+print('--------------------------')
