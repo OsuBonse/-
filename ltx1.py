@@ -34,11 +34,18 @@ workbook = load_workbook(filename='opus.xlsx')
 worksheet = workbook['123']
 
 last_row = worksheet.max_row
-while worksheet.cell(row=last_row, column=3).value is None and last_row > 1:
+while worksheet.cell(row=last_row, column=2).value is None and last_row > 1:
     last_row -= 1
 
+arc = last_row+1
 print(last_row)
 
+
 with pd.ExcelWriter('opus.xlsx') as writer:
-    pd.DataFrame([length]).to_excel(writer, sheet_name='123',startrow=last_row)
-    df.to_excel(writer, sheet_name='123', index=True,startrow=8,startcol=1)
+    pd.DataFrame([length]).to_excel(writer, sheet_name='123',startrow=arc,startcol=1, header=False,index =False)
+    df.to_excel(writer, sheet_name='123', index=True,startrow=8,startcol=0)
+    
+print(worksheet.max_row)
+worksheet.cell(row=arc-1, column=1, value='Всього')
+worksheet.cell(row=9, column=1, value='№ п/п')
+workbook.save('opus.xlsx')
