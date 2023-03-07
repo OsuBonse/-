@@ -1,36 +1,43 @@
 import pandas as pd
 from openpyxl import load_workbook
 
-df = pd.read_csv('ltx.csv')
+df = pd.read_csv('practice\ltx.csv')
 df_group = df.groupby(['PurposeOfTheAssignment', 'Koatyy','Price','ValueNGO'], as_index=False)
 a = df['PurposeOfTheAssignment'].value_counts().reset_index()
 b = df.groupby('PurposeOfTheAssignment')['Koatyy'].sum().sort_values(ascending=False).reset_index()
-c = df.groupby('PurposeOfTheAssignment')['Price'].median().sort_values(ascending=False).reset_index()
-d = df.groupby('PurposeOfTheAssignment')['ValueNGO'].median().sort_values(ascending=False).reset_index()
+c = df.groupby('PurposeOfTheAssignment')['Price'].sum().sort_values(ascending=False).reset_index()
+d = df.groupby('PurposeOfTheAssignment')['ValueNGO'].sum().sort_values(ascending=False).reset_index()
 
-a1 = a['index']
-a1_1 = a['PurposeOfTheAssignment']
-b1 = b['Koatyy']
-c1 = c['Price']
-d1 = d['ValueNGO']
-length = a.shape[0]
+###################################
+a1 = a['index']                   #
+a1_1 = a['PurposeOfTheAssignment']#
+b1 = b['Koatyy']                  #
+c1 = c['Price']                   #
+d1 = d['ValueNGO']                #
+length = a.shape[0]               #
+###################################
+#----------------------------#
+c2 = c1.div(b1, fill_value=0)#
+d2 = c1.div(d1, fill_value=0)#
+#----------------------------#
+################################################################
+print('-----------INDEX---------------')                       #
+print(a1)                                                      #
+print('-----------PurposeOfTheAssignment---------------')      #
+print(a1_1)                                                    #
+print('------------Koatyy--------------')                      # 
+print(b1)                                                      #
+print('-------------Price-------------')                       #
+print(c2)                                                      #
+print('--------------ValueNGO------------')                    #
+print(d2)                                                      #
+print('--------------------------')                            #
+################################################################
 
-print('--------------------------')
-print(a1)
-print('--------------------------')
-print(a1_1)
-print('--------------------------')
-print(b1)
-print('--------------------------')
-print(c1)
-print('--------------------------')
-print(d1)
-print('--------------------------')
-
-data = {'Цільове призначення': a1 , 'Кількість угод': a1_1, 'Площа, га': b1, 'Ціна (вартість), грн./га': c1, 'Значення НГО, грн./га': d1}
+data = {'Цільове призначення': a1 , 'Кількість угод': a1_1, 'Площа, га': b1, 'Ціна (вартість), грн./га': c2, 'Значення НГО, грн./га': d2}
 df = pd.DataFrame(data)
 
-workbook = load_workbook(filename='opus.xlsx')
+workbook = load_workbook(filename='practice\opus.xlsx')
 worksheet = workbook['123']
 
 last_row = worksheet.max_row
