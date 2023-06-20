@@ -8,31 +8,30 @@ b = df.groupby('PurposeOfTheAssignment')['Koatyy'].sum().sort_values(ascending=F
 c = df.groupby('PurposeOfTheAssignment')['Price'].sum().sort_values(ascending=False).reset_index()
 d = df.groupby('PurposeOfTheAssignment')['ValueNGO'].sum().sort_values(ascending=False).reset_index()
 
-###################################
-a1 = a['index']                   #
-a1_1 = a['PurposeOfTheAssignment']#
-b1 = b['Koatyy']                  #
-c1 = c['Price']                   #
-d1 = d['ValueNGO']                #
-length = a.shape[0]               #
-###################################
-#----------------------------#
+
+a1 = a['index']                   
+a1_1 = a['PurposeOfTheAssignment']
+b1 = b['Koatyy']                  
+c1 = c['Price']                   
+d1 = d['ValueNGO']                
+length = a.shape[0]               
+
+
 c2 = c1.div(b1, fill_value=0)#
 d2 = c1.div(d1, fill_value=0)#
-#----------------------------#
-################################################################
-print('-----------INDEX---------------')                       #
-print(a1)                                                      #
-print('-----------PurposeOfTheAssignment---------------')      #
-print(a1_1)                                                    #
-print('------------Koatyy--------------')                      # 
-print(b1)                                                      #
-print('-------------Price-------------')                       #
-print(c2)                                                      #
-print('--------------ValueNGO------------')                    #
-print(d2)                                                      #
-print('--------------------------')                            #
-################################################################
+
+print('-----------INDEX---------------')                       
+print(a1)                                                      
+print('-----------PurposeOfTheAssignment---------------')      
+print(a1_1)                                                    
+print('------------Koatyy--------------')                      
+print(b1)                                                      
+print('-------------Price-------------')                       
+print(c2)                                                      
+print('--------------ValueNGO------------')                    
+print(d2)                                                      
+print('--------------------------')                            
+
 
 data = {'Цільове призначення': a1 , 'Кількість угод': a1_1, 'Площа, га': b1, 'Ціна (вартість), грн./га': c2, 'Значення НГО, грн./га': d2}
 df = pd.DataFrame(data)
